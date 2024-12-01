@@ -1,0 +1,80 @@
+{% load static %}
+{% load custom_filters %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.name }}</title>
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title">{{ profile.name }}</h1>
+        </div>
+    </header>
+
+    <main class="profile">
+        <div class="container">
+            <!-- Описание профиля -->
+            <section class="profile__details">
+                <h2 class="profile__header">Описание профиля</h2>
+                <p class="profile__description">{{ profile.description }}</p>
+            </section>
+
+            <!-- Список необходимых предметов -->
+            <section class="profile__subjects-section">
+                 <h3>Проходной балл: {{profile.passing_score}}</h3>
+                <h2 class="profile__header">Необходимые предметы</h2>
+                <ul class="profile__subjects">
+                    {% for subject in profile.subjects.all %}
+                        <li>
+                            {{ subject.name }} (Минимальный балл:
+                            {{ min_scores_dict|default:''|dict_key:subject.id }}
+                            )
+                        </li>
+                    {% empty %}
+                        <p>Нет указанных предметов.</p>
+                    {% endfor %}
+                </ul>
+            </section>
+
+            <!-- Похожие профили -->
+            <section class="related-profiles">
+                <h2 class="related-profiles__title">Похожие профили</h2>
+                <div class="related-profiles__list">
+                    {% for related_profile in profile.similar_profiles.all %}
+                        <div class="related-profile">
+                            <h3>{{ related_profile.name }}</h3>
+                            <p>{{ related_profile.description|truncatewords:15 }}</p>
+                            <a href="{% url 'profiles:profile' related_profile.id %}" class="related-profile__link">Подробнее</a>
+                        </div>
+                    {% empty %}
+                        <p>Нет похожих профилей.</p>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- Изображения профиля -->
+            <section class="profile__images">
+                <h2 class="profile__header">Галерея</h2>
+                <div class="profile__image-gallery">
+                    {% for image in profile.images.all %}
+                        <img src="{{ image.image.url }}" alt="Изображение профиля" class="profile__image">
+                    {% empty %}
+                        <p>Нет изображений для этого профиля.</p>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Профильная система. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>

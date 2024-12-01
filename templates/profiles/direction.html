@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ direction.name }}</title>
+    <link rel="stylesheet" href="{% static 'direction.css' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title">{{ direction.name }}</h1>
+        </div>
+    </header>
+
+    <main class="direction-type">
+        <div class="container">
+            <!-- Описание направления -->
+            <section class="direction-type__description">
+                <h2 class="direction-type__header">Описание направления</h2>
+                <p class="direction-type__text">{{ direction.description }}</p>
+            </section>
+
+            <!-- Изображение направления -->
+            {% if direction_type.image %}
+            <section class="direction-type__image">
+                <img src="{{ direction.image.url }}" alt="Изображение направления" class="direction-type__image-content">
+            </section>
+            {% endif %}
+
+            <!-- Список факультетов данного направления -->
+            <section class="direction-type__faculties">
+                <h2 class="direction-type__header">Факультеты</h2>
+                <ul class="direction-type__faculty-list">
+                    {% for faculty in faculties %}
+                        <li class="faculty-item">
+                            <h3 class="faculty-item__name">{{ faculty.name }}</h3>
+                            <p class="faculty-item__description">{{ faculty.description|truncatewords:20 }}</p>
+                            <a href="{% url 'profiles:faculties' faculty.id %}" class="faculty-item__link">Подробнее</a>
+                        </li>
+                    {% empty %}
+                        <p>Нет факультетов для этого направления.</p>
+                    {% endfor %}
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Система направлений. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>

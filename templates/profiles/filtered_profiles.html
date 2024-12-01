@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты фильтрации</title>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Результаты фильтрации</h1>
+        </header>
+
+        <section class="profiles">
+            <h2>Подходящие профили</h2>
+            <div class="grid">
+                {% if profiles %}
+                    {% for profile in profiles %}
+                    <div class="card">
+                        <h3>{{ profile.name }}</h3>
+                        <p>{{ profile.description }}</p>
+                        <p>Проходной балл: {{ profile.passing_score }}</p>
+                        <a href="{% url 'profiles:profile' profile.id %}" class="view-profile">Подробнее</a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Нет подходящих профилей по указанным баллам.</p>
+                {% endif %}
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>© Московский Политех. Все права защищены.</p>
+        </footer>
+    </div>
+</body>
+</html>

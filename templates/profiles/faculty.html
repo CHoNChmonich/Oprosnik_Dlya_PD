@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Факультет</title>
+    <link rel="stylesheet" href="{% static 'faculty.css' %}">
+    <style>
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title">Московский Политех</h1>
+            <nav class="header__nav">
+                <a href="/" class="nav__link">Главная</a>
+                <a href="/faculties/" class="nav__link">Факультеты</a>
+                <a href="/test/" class="nav__link">Тестирование</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="faculty">
+                <h2 class="faculty__name">{{ faculty.name }}</h2>
+                <p class="faculty__description">{{ faculty.description }}</p>
+
+
+            </section>
+
+            <section class="faculty__profiles">
+                <h3>Профили факультета</h3>
+                <div class="profiles">
+                    {% for profile in faculty.profiles.all %}
+                    <div class="profile">
+                        <h4 class="profile__name">{{ profile.name }}</h4>
+                        <p class="profile__description">{{ profile.description }}</p>
+                        <p class="profile__score">Проходной балл: {{ profile.passing_score }}</p>
+                        <a href="/profiles/{{ profile.id }}/" class="profile__link">Подробнее</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer__text">© Московский Политех, {{ year }}</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профессиональная ориентация</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+<body>
+<div class=>
+    <form method="GET" action="{% url 'profiles:filter_profiles' %}" class="filter-form">
+        <h3>Выберите три предмета ЕГЭ и введите суммарный балл:</h3>
+
+        <div class="subjects">
+            {% for subject in subject_list %}
+            <div class="subject">
+                <label>
+                    <input type="checkbox" name="subjects" value="{{ subject.name }}"
+                        {% if subject.name in selected_subjects %}checked{% endif %}>
+                    {{ subject.name }}
+                </label>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="score-input">
+            <label for="total_score">Суммарный балл:</label>
+            <input type="number" id="total_score" name="total_score" placeholder="Введите ваш балл"
+                value="{{ total_score }}" min="0" max="300">
+        </div>
+
+        <button type="submit" class="filter-button">Фильтровать</button>
+    </form>
+</div>
+    <div class="container">
+        <header class="header">
+            <h1>Профессиональная ориентация</h1>
+            <p>Перед вами профориентационный тест, созданный специально для тех, кто задумывается о выборе будущей профессии и своем пути.</p>
+        </header>
+
+        <section class="test-section">
+            <h2>Начать тестирование</h2>
+            <p>Прохождение теста — это первый шаг к осознанному выбору профессии и успешному будущему.</p>
+            <a href="{% url 'test:test' first_question.id %}" class="start-button">Начать тест</a>
+        </section>
+
+        <section class="directions">
+            <h2>Возможные направления</h2>
+            <div class="grid">
+                {% for direction in directions %}
+                <div class="card realistic"><a href="{% url 'profiles:directions' direction.id %}">{{direction.name}}</a></div>
+                {%endfor%}
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>© Московский Политех. Все права защищены.</p>
+        </footer>
+    </div>
+</body>
+</html>

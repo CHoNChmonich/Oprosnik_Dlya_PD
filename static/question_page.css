@@ -1,0 +1,80 @@
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        .question-block {
+            flex: 1;
+            background-color: #e34a4a;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .question-block h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .answers {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .answer {
+            background-color: #ffffff;
+            color: #e34a4a;
+            text-align: center;
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .answer:hover {
+            background-color: #e34a4a;
+            color: #fff;
+        }
+        .next-btn {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .next-btn a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            color: #e34a4a;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .next-btn a:hover {
+            background-color: #fff;
+            color: #333;
+        }
+        .info-block {
+            flex: 1;
+            padding: 20px;
+        }
+        .info-block p {
+            line-height: 1.6;
+            font-size: 16px;
+        }
