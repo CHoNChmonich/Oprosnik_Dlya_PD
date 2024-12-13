@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Результаты фильтрации</title>
-    <link rel="stylesheet" href="{% static 'filtered_profiles.css' %}">
+    <title>Профили</title>
+    <link rel="stylesheet" href="{% static 'faculties_list.css' %}">
 </head>
 <body>
 <header class="header">
@@ -20,15 +20,15 @@
         </header>
     <div class="container">
 
+
         <section class="profiles">
-            <h2>Подходящие профили</h2>
+            <h2>Все факультеты университета</h2>
             <div class="grid">
                 {% if profiles %}
                     {% for profile in profiles %}
                     <div class="card">
                         <h3>{{ profile.name }}</h3>
                         <p>{{ profile.description }}</p>
-                        <p>Проходной балл: {{ profile.passing_score }}</p>
                         <a href="{% url 'profiles:profile' profile.id %}" class="view-profile">Подробнее</a>
                     </div>
                     {% endfor %}

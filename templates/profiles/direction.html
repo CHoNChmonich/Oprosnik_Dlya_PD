@@ -10,9 +10,14 @@
 <body>
     <header class="header">
         <div class="container">
-            <h1 class="header__title">{{ direction.name }}</h1>
+            <h1 class="header__title">Московский Политех</h1>
+            <nav class="header__nav">
+                <a href="/" class="nav__link">Главная</a>
+                <a href="{% url 'profiles:faculties_list' %}" class="nav__link">Факультеты</a>
+                <a href="{% url 'profiles:profiles_list' %}" class="nav__link">Профили</a>
+            </nav>
         </div>
-    </header>
+        </header>
 
     <main class="direction-type">
         <div class="container">

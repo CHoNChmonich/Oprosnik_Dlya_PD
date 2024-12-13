@@ -1,5 +1,5 @@
 from django.db import models
-from profiles.models import DirectionType
+from profiles.models import Profile
 
 
 class Question(models.Model):
@@ -17,7 +17,7 @@ class Answer(models.Model):
     text = models.TextField(max_length=255)
     next_question = models.ForeignKey(Question, on_delete=models.SET_NULL, null=True, blank=True,
                                       related_name="previous_answers")
-    recommend_direction = models.ForeignKey(DirectionType, on_delete=models.SET_NULL, null=True, blank=True,
+    recommend_profile = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True,
                                             related_name='related_answers')
 
     def __str__(self):

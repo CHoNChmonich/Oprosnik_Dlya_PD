@@ -1,7 +1,5 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Profile, Faculty, DirectionType
 from django.shortcuts import render
-from profiles.models import Profile, Subject, ProfileSubjectMinScore
+from profiles.models import Profile, Subject, ProfileSubjectMinScore, Faculty, DirectionType
 from profiles.utils import filter_profiles_by_user_scores  # Импорт функции фильтрации
 
 
@@ -53,9 +51,17 @@ def faculty_detail(request, faculty_id):
     return render(request, 'profiles/faculty.html', context)
 
 
+def faculties_list(request):
+    faculties = Faculty.objects.all()
+    context = {
+        'faculties': faculties
+    }
+    return render(request, 'profiles/faculty_list.html', context)
+
+
 def profile_detail(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
-    subjects_dict={}
+    subjects_dict = {}
     subjects_min_score = ProfileSubjectMinScore.objects.filter(profile_id=profile).values('subject_id', 'score')
     min_scores_dict = {item['subject_id']: item['score'] for item in subjects_min_score}
     context = {
@@ -64,6 +70,14 @@ def profile_detail(request, profile_id):
         'min_scores_dict': min_scores_dict,
     }
     return render(request, 'profiles/profile.html', context)
+
+
+def profiles_list(request):
+    profiles = Profile.objects.all()
+    context = {
+        'profiles': profiles
+    }
+    return render(request, 'profiles/profiles_list.html', context)
 
 
 def filter_profiles(request):
@@ -87,4 +101,3 @@ def filter_profiles(request):
         'selected_subjects': selected_subjects,
         'total_score': total_score,
     })
-

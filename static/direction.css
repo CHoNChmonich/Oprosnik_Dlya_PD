@@ -1,36 +1,73 @@
-.direction-type {
+/* Общие стили */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    color: #000;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
 }
 
-.direction-type__header {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 15px;
+/* Заголовок */
+.header {
+    background-color: #000;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
 }
 
+.header__title {
+    font-size: 2.5em;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+/* Основной контент */
+.direction-type {
+    margin-top: 30px;
+}
+
+/* Секция описания */
 .direction-type__description {
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 25px;
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 2px solid #000;
+    border-radius: 10px;
+}
+
+.direction-type__header {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #000;
+    padding-bottom: 5px;
 }
 
 .direction-type__text {
-    color: #333;
+    font-size: 1.2em;
+    line-height: 1.6;
 }
 
+/* Секция изображения */
 .direction-type__image {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .direction-type__image-content {
     max-width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    height: auto;
+    border: 5px solid #000;
+    border-radius: 10px;
 }
 
+/* Секция факультетов */
 .direction-type__faculties {
-    margin-top: 30px;
+    margin-bottom: 40px;
 }
 
 .direction-type__faculty-list {
@@ -39,32 +76,88 @@
 }
 
 .faculty-item {
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
+    background-color: #fff;
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 20px;
     margin-bottom: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.faculty-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .faculty-item__name {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.faculty-item__description {
-    font-size: 14px;
-    color: #555;
+    font-size: 1.5em;
     margin-bottom: 10px;
 }
 
+.faculty-item__description {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
 .faculty-item__link {
-    display: inline-block;
-    padding: 5px 10px;
-    background-color: #0066cc;
+    font-size: 1em;
+    font-weight: bold;
     color: #fff;
+    background-color: #000;
+    padding: 10px 15px;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
 .faculty-item__link:hover {
-    background-color: #005bb5;
+    background-color: #555;
+}
+
+/* Футер */
+.footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
+/* Хедер */
+.header {
+    background-color: #000; /* Черный фон */
+    padding: 20px 0;
+}
+
+.header__title {
+    margin: 0;
+    font-size: 2rem;
+    text-align: center;
+    color: #fff; /* Белый цвет текста */
+}
+
+.header__nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.nav__link {
+    color: #fff; /* Белый цвет ссылок */
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin: 0 15px;
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.nav__link:hover {
+    border-color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
 }

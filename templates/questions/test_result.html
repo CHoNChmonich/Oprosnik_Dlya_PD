@@ -1,136 +1,28 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Результат теста</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .header {
-            text-align: left;
-            margin-bottom: 20px;
-        }
-        .header h1 {
-            font-size: 28px;
-        }
-        .result-block {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .result-info {
-            flex: 1;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .result-info h2 {
-            margin-top: 0;
-            font-size: 24px;
-            color: #333;
-        }
-        .result-info p {
-            margin: 10px 0;
-        }
-        .result-icon {
-            width: 150px;
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f3f4fc;
-            border-radius: 10px;
-        }
-        .result-icon img {
-            width: 80px;
-            height: 80px;
-        }
-        .details {
-            margin-top: 20px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .recommended-block {
-            margin-top: 30px;
-        }
-        .recommended-block h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .faculties {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-        .faculty {
-            background-color: #f4f4f4;
-            color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            position: relative;
-            font-size: 18px;
-        }
-        .faculty:nth-child(1) {
-            background-color: #4b79da;
-        }
-        .faculty:nth-child(2) {
-            background-color: #e34a4a;
-        }
-        .faculty:nth-child(3) {
-            background-color: #1b69a4;
-        }
-        .faculty:nth-child(4) {
-            background-color: #000;
-        }
-        .faculty p {
-            margin: 0 0 10px 0;
-        }
-        .faculty a {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            text-decoration: none;
-            font-size: 18px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transition: background-color 0.3s;
-        }
-        .faculty a:hover {
-            background-color: #fff;
-            color: #333;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'test_result.css' %}">
 </head>
 <body>
+<header class="header">
+        <div class="container">
+            <h1 class="header__title">Московский Политех</h1>
+            <nav class="header__nav">
+                <a href="/" class="nav__link">Главная</a>
+                <a href="{% url 'profiles:faculties_list' %}" class="nav__link">Факультеты</a>
+                <a href="{% url 'profiles:profiles_list' %}" class="nav__link">Профили</a>
+            </nav>
+        </div>
+        </header>
     <div class="container">
         <!-- Заголовок -->
-        <div class="header">
-            <h1>Ваш результат</h1>
-        </div>
+
+        <h1>Ваш результат</h1>
+
 
         <!-- Блок результата -->
         <div class="result-block">
@@ -138,7 +30,7 @@
                 <img src="https://via.placeholder.com/80" alt="Иконка результата">
             </div>
             <div class="result-info">
-                <h2>{{direction.name}}</h2>
+                <h2>{{profile.name}}</h2>
                 <p>Ваш подход такое-то направление потому что вы такой-то...</p>
                 <p>Ваши навыки подходят на 85% для специализаций такого-то типа.</p>
             </div>
@@ -149,16 +41,17 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
         </div>
+        <a href="{% url 'profiles:profile' profile.id %}">→</a>
 
         <!-- Рекомендуемые факультеты -->
         <div class="recommended-block">
-            <h2>Рекомендуемые факультеты</h2>
+            <h2>Рекомендуемые профили</h2>
             <div class="faculties">
-                {% for faculty in faculties%}
+                {% for recommend_profile in profile.similar_profiles.all%}
                 <div class="faculty">
-                    <p>{{faculty.name}}</p>
-                    <p>{{faculty.description}}</p>
-                    <a href="{% url 'profiles:faculties' faculty.id %}">→</a>
+                    <p>{{recommend_profile.name}}</p>
+                    <p>{{recommend_profile.description}}</p>
+                    <a href="{% url 'profiles:profile' recommend_profile.id %}">→</a>
                 </div>
                 {% endfor %}
             </div>

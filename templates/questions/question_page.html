@@ -1,94 +1,26 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вопрос</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 20px;
-        }
-        .question-block {
-            flex: 1;
-            background-color: #e34a4a;
-            color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .question-block h2 {
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-        .answers {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-        .answer {
-            background-color: #ffffff;
-            color: #e34a4a;
-            text-align: center;
-            padding: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .answer:hover {
-            background-color: #e34a4a;
-            color: #fff;
-        }
-        .next-btn {
-            margin-top: 20px;
-            display: flex;
-            justify-content: flex-end;
-        }
-        .next-btn a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: #fff;
-            color: #e34a4a;
-            border: 2px solid #fff;
-            border-radius: 50%;
-            text-decoration: none;
-            font-size: 20px;
-            font-weight: bold;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .next-btn a:hover {
-            background-color: #fff;
-            color: #333;
-        }
-        .info-block {
-            flex: 1;
-            padding: 20px;
-        }
-        .info-block p {
-            line-height: 1.6;
-            font-size: 16px;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'question_page.css' %}">
+
 </head>
 <body>
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title">Московский Политех</h1>
+            <nav class="header__nav">
+                <a href="/" class="nav__link">Главная</a>
+                <a href="{% url 'profiles:faculties_list' %}" class="nav__link">Факультеты</a>
+                <a href="{% url 'profiles:profiles_list' %}" class="nav__link">Профили</a>
+            </nav>
+        </div>
+    </header>
     <div class="container">
+
         <!-- Блок вопроса -->
         <div class="question-block">
             <h2>Вопрос {{question.number}}</h2>
@@ -98,7 +30,7 @@
                     {%if answer.next_question %}
                     <a href="{% url 'test:test' answer.next_question.id %}">{{answer.text}}</a>
                     {%else%}
-                    <a href="{% url 'test:result' answer.recommend_direction.id %}">{{answer.text}}</a>
+                    <a href="{% url 'test:result' answer.recommend_profile.id %}">{{answer.text}}</a>
                     {%endif%}
                 </div>
                 {% endfor %}
@@ -111,10 +43,7 @@
         <!-- Блок дополнительной информации -->
         <div class="info-block">
             <h2>{{question.body}}</h2>
-            <p>
-                Я почти уверен, что здесь зачем-то понадобится блок текста. Может для какого-то пояснения или еще чего-то.
-                Дададададададададададададададададададададададададададададададададададададададададададададададададададада.
-            </p>
+
         </div>
     </div>
 </body>
